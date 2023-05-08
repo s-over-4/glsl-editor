@@ -1,0 +1,178 @@
+:root {
+    --bg0: #1d2021;
+    --bg1: #3c3836;
+    --bg2: #504945;
+    --bg3: #665c54;
+    --bg4: #7c6f64;
+
+    --fg0: #FBF1C7;
+    --fg1: #EBDBB2;
+    --fg2: #D5C4A1;
+    --fg3: #BDAE93;
+    --fg4: #A89984;
+
+    --bred: #fb4934;
+    --borange: #fe8019;
+    --byellow: #fabd2f;
+    --bblue: #83a598;
+    --baqua: #8ec07c;
+    --bgreen: #b8bb26;
+    --bpurple: #d3869b;
+}
+
+html {
+    font-family: 'Hack Nerd Font', 'Nerd Font', monospace;
+    background-color: var(--bg0);
+    font-size: 16px;
+}
+
+body {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template:
+        "result editor" 3fr
+        "action editor" 1fr /
+        1fr 1fr;
+    margin: 1rem !important;
+    height: auto;
+    width: auto;
+}
+
+a {
+    color: var(--bblue)
+}
+
+button, input, label {
+    border: none;
+    outline: none;
+    border-radius: 0.8rem;
+    margin: 0rem;
+    padding: 1rem;
+    color: var(--fg0);
+    background-color: var(--bg1);
+    font-size: 1em;
+    transition: all 0.1s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    gap: 0.5rem;
+}
+
+button:active, input:active, 
+label:active, label:focus, 
+input[type=text]:focus {
+    outline: none;
+    border: none;
+    color: var(--fg1);
+    background-color: var(--bg2);
+    outline: 0.2rem solid var(--bpurple);
+}
+
+.pane {
+    padding: 1rem;
+    margin: 0;
+    border: 0.2rem solid var(--fg4);
+    background-color: var(--bg0);
+    display: block;
+    border-radius: 0.8rem;
+    transition: all 0.1s linear;
+}
+
+.pane:active, .page:hover {
+    border: 0.2rem solid var(--fg0);
+}
+
+#result {  grid-area: result; }
+#editor {  grid-area: editor; }
+#action {  grid-area: action; }
+
+iframe {
+    border: 0.2rem solid var(--bg4);
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+#editors {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+code-input {
+    border-radius: 0.8rem;
+    transition: all 0.1s linear;
+    padding: 1rem;
+    font-family: 'Hack Nerd Font', monospace !important;
+}
+
+code-input:active, code-input:focus, code-input:hover {
+    outline: 0.2rem solid var(--bpurple);
+}
+
+.label {
+    color: var(--baqua);
+    position: relative;
+    top: -1.7rem;
+    left: 1.5rem;
+    width: fit-content;
+    background-color: var(--bg0);
+    width: fit-content;
+    padding-inline: 0.2rem;
+    font-weight: bold;
+}
+
+#canvas-container {
+    width: inherit;
+    height: inherit;
+}
+
+#canvas {
+    border-radius: 0.8rem;
+    width: 100%;
+}
+
+#actions {
+    display: flex;   
+    flex-direction: row;
+    justify-content: stretch;
+    height: fit-content;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.suggestion {
+    background-color: var(--bg4);
+    color: var(--fg4);
+    font-style: italic;
+    padding: 0.2rem;
+    margin: 0;
+    border: none;
+}
+
+.key_code {
+    color: var(--bpurple);
+    background-color: var(--bg2);
+    margin: 0.5rem;
+    padding-inline: 0.5rem;
+    border-top: 0.2rem solid var(--bg4);
+    border-left: 0.2rem solid var(--bg4);
+    border-bottom: 0.2rem solid var(--bg);
+    border-right: 0.2rem solid var(--bg);
+    border-radius: 0.8rem;
+}
+
+.key_code::before {
+    content: "<";
+
+    color: var(--fg4);
+}
+.key_code::after {
+    content: ">";
+
+    color: var(--fg4);
+}

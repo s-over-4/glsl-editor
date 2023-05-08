@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>glsl</title>
+
+    <!-- highlight.js -->
+    <!-- https://github.com/highlightjs/highlight.js/ -->
+    <link rel="stylesheet" href="highlight/styles/base16/gruvbox-dark-medium.min.css">
+    <script src="highlight/highlight.min.js"></script>
+
+    <!-- code-input -->
+    <!-- https://github.com/WebCoder49/code-input -->
+    <script src="code-input/code-input.min.js"></script>
+    <link rel="stylesheet" href="code-input/code-input.css">
+
+    <script src="code-input/plugins/indent.js"></script>
+
+    <script src="code-input/plugins/autocomplete.js"></script>
+    <link rel="stylesheet" href="code-input/plugins/autocomplete.css">
+
+    <!-- glslCanvas -->
+    <!-- https://github.com/patriciogonzalezvivo/glslCanvas -->
+    <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+</head>
+<body>
+    <div class="pane" id="result">
+        <div class="label">result</div>
+        <canvas id="canvas" height="200%"></canvas>
+    </div>
+    <div class="pane" id="editor">
+        <div class="label">editor</div>
+        <div id="editors">            
+            <code-input lang="glsl" id="frag-shader"   tabindex="0"></code-input>
+        </div>
+    </div>
+    <div class="pane" id="action">
+        <div class="label">actions</div>
+        <div id="actions">
+            <button id="refresh">
+                <b>refresh</b>
+                <span>
+                    <span class="key_code">C</span>+<span class="key_code">CR</span>
+                </span>
+            </button>
+            <button id="save">
+                <b>save</b>
+                <span>
+                    <span class="key_code">C-s</span>
+                </span>
+            </button>
+            <button id="clear">
+                <b>clear cookies</b>
+            </button>
+        </div>
+    </div>
+    <script src="main.js"></script>
+    <script>
+        use_editors();
+        load();
+    </script>
+</body>
+</html>
