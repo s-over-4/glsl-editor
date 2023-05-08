@@ -1,6 +1,7 @@
 # glsl-editor
 
-A clone of [shadertoy](//www.shadertoy.com) because their UI sucks.
+A clone of [shadertoy](//www.shadertoy.com) because their UI sucks. 
+Hosted [here](//nest.place/glsl)
 
 This is merely a bit of custom styling over these excellent projects by other people:
 
