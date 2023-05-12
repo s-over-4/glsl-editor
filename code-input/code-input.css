@@ -18,7 +18,7 @@ code-input {
   padding: 1rem;
   margin: 0 !important;
   width: calc(100% - 2rem);
-  height: 20rem;
+  height: calc(100% - 3.2rem);
   font-size: normal;
   font-family: monospace;
   line-height: 1.5; /* Inherited to child elements */
@@ -30,10 +30,10 @@ code-input {
 code-input textarea, code-input:not(.code-input_pre-element-styled) pre code, code-input.code-input_pre-element-styled pre {
   /* Both elements need the same text and space styling so they are directly on top of each other */
   margin: 0px!important;
-  padding: var(--padding, 16px)!important;
+  padding: 1rem !important;
   border: 0;
-  width: calc(100% - var(--padding, 16px) * 2);
-  height: calc(100% - var(--padding, 16px) * 2);
+  width: calc(100% - 1rem * 2);
+  height: calc(100% - 1rem * 2);
 }
 code-input:not(.code-input_pre-element-styled) pre, code-input.code-input_pre-element-styled pre code {
   /* Remove all margin and padding from others */
@@ -75,17 +75,21 @@ code-input pre {
 code-input textarea {
   color: transparent;
   background: transparent;
-  caret-color: inherit!important; /* Or choose your favourite color */
+  caret-color: inherit !important;
 }
 
 /* Can be scrolled */
 code-input textarea, code-input pre {
-  overflow: auto!important;
+  overflow:auto!important;
 
-  white-space: inherit;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
   word-spacing: normal;
   word-break: normal;
-  word-wrap: normal;
 }
 
 /* No resize on textarea; stop outline */

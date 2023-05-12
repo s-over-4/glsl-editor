@@ -110,7 +110,7 @@ var codeInput = {
             return text.replace(new RegExp("&", "g"), "&amp;").replace(new RegExp("<", "g"), "&lt;"); /* Global RegExp */
         }
 
-        /* Get the template for this element or add to the unrecognised template queue. */
+        /* Get the template for this element or add to the unrecognized template queue. */
         get_template() {
             // Get name of template
             let template_name;

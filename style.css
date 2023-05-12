@@ -23,19 +23,26 @@
 html {
     font-family: 'Hack Nerd Font', 'Nerd Font', monospace;
     background-color: var(--bg0);
-    font-size: 16px;
+    font-size: 14px;
+    margin: 0rem !important;
+    padding: 0rem !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    display: contents;
 }
 
 body {
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template:
-        "result editor" 3fr
-        "action editor" 1fr /
-        1fr 1fr;
+    position:fixed;
     margin: 1rem !important;
-    height: auto;
-    width: auto;
+    padding: 0rem !important;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template:
+        "result editor" auto
+        "action editor" min-content /
+        50% 50%;
+    width: calc(100vw - 3rem);
+    height: calc(100vh - 2rem);
 }
 
 a {
@@ -60,10 +67,8 @@ button, input, label {
 }
 
 button:active, input:active, 
-label:active, label:focus, 
-input[type=text]:focus {
-    outline: none;
-    border: none;
+button:hover, input:hover {
+    outline: 0.2rem solid var(--bpurple);
     color: var(--fg1);
     background-color: var(--bg2);
     outline: 0.2rem solid var(--bpurple);
@@ -71,10 +76,13 @@ input[type=text]:focus {
 
 .pane {
     padding: 1rem;
-    margin: 0;
+    margin: 0rem !important;
     border: 0.2rem solid var(--fg4);
     background-color: var(--bg0);
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: stretch;
     border-radius: 0.8rem;
     transition: all 0.1s linear;
 }
@@ -94,13 +102,12 @@ iframe {
 }
 
 #editors {
+    height: 100%;
+    padding: 0rem;
+    margin: 0rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
     justify-content: stretch;
-    align-items: stretch;
 }
 
 code-input {
@@ -108,6 +115,8 @@ code-input {
     transition: all 0.1s linear;
     padding: 1rem;
     font-family: 'Hack Nerd Font', monospace !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
 }
 
 code-input:active, code-input:focus, code-input:hover {
@@ -116,19 +125,17 @@ code-input:active, code-input:focus, code-input:hover {
 
 .label {
     color: var(--baqua);
-    position: relative;
-    top: -1.7rem;
-    left: 1.5rem;
+    position:static;
     width: fit-content;
     background-color: var(--bg0);
     width: fit-content;
     padding-inline: 0.2rem;
     font-weight: bold;
-}
-
-#canvas-container {
-    width: inherit;
-    height: inherit;
+    height: fit-content;
+    padding-block: 0;
+    margin-top: -1.7rem;
+    margin-bottom: 0.1rem;
+    margin-left: 2rem;
 }
 
 #canvas {
@@ -139,10 +146,7 @@ code-input:active, code-input:focus, code-input:hover {
 #actions {
     display: flex;   
     flex-direction: row;
-    justify-content: stretch;
-    height: fit-content;
     gap: 0.5rem;
-    flex-wrap: wrap;
 }
 
 .suggestion {
@@ -155,15 +159,7 @@ code-input:active, code-input:focus, code-input:hover {
 }
 
 .key_code {
-    color: var(--bpurple);
-    background-color: var(--bg2);
-    margin: 0.5rem;
-    padding-inline: 0.5rem;
-    border-top: 0.2rem solid var(--bg4);
-    border-left: 0.2rem solid var(--bg4);
-    border-bottom: 0.2rem solid var(--bg);
-    border-right: 0.2rem solid var(--bg);
-    border-radius: 0.8rem;
+    color: var(--bpurple)
 }
 
 .key_code::before {
@@ -176,3 +172,82 @@ code-input:active, code-input:focus, code-input:hover {
 
     color: var(--fg4);
 }
+
+#help_msg {
+    position: fixed;
+    top: 10rem;
+    left: 10rem;
+    border: 0.2rem solid var(--bgreen);
+    padding: 0;
+    background-color: var(--bg);
+    border-radius: 0.8rem;
+    display:none;
+}
+
+#edit-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    gap: 0.5rem;
+    height: calc(100% - 0.5rem);
+    flex-grow: 1;
+}
+
+#frag-shader {
+    flex-grow: 2;
+}
+
+#vert-shader {
+    flex-shrink: 1.5;
+}
+
+.stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    gap: 0.5rem;
+    flex-shrink: 1;
+}
+
+.stat {
+    color: var(--fg1);
+    background-color: var(--bg1);
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    flex-grow: 1;   
+    text-align: center;
+}
+
+code-input::after {
+    content: attr(lang);
+    color: var(--fg4);
+    background-color: var(--bg1);
+    width: fit-content;
+    z-index: 100;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    transition: all 0.2s linear;
+    text-align: right;
+}
+
+code-input:hover::after {
+    opacity: 0;
+}
+
+code-input::-webkit-scrollbar {
+    display: none;
+}
+
+#upload {
+    flex-grow: 4;
+    color: var(--borange)
+}
+
+
+#help_msg > pre { margin: 0 !important}
+#help_msg { overflow: auto !important} /* Brought to you by @JRF */

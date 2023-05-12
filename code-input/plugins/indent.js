@@ -11,7 +11,11 @@
     /* Add keystroke events */
     afterElementsAdded(codeInput) {
         let textarea = codeInput.querySelector("textarea");
-        textarea.addEventListener('keydown', (event) => { this.check_tab(codeInput, event); this.check_enter(codeInput, event); });
+        textarea.addEventListener('keydown', (event) => { 
+            this.check_tab(codeInput, event); 
+            this.check_enter(codeInput, event); 
+            this.check_close(codeInput, event);
+        });
     }
 
     /* Event handlers */
@@ -25,7 +29,7 @@
         
         if(!event.shiftKey && input_element.selectionStart == input_element.selectionEnd) {
             // Just place a tab here.
-            document.execCommand("insertText", false, "   ");
+            document.execCommand("insertText", false, "\t");
 
         } else {
             let lines = input_element.value.split("\n");
@@ -43,11 +47,11 @@
                 || (selection_start == selection_end && selection_start <= letter_i+lines[i].length+1 && selection_end >= letter_i)) { // + 1 so newlines counted
                     // Starts before or at last char and ends after or at first char
                     if(event.shiftKey) {
-                        if(lines[i][0] == "   ") {
+                        if(lines[i][0] == "\t") {
                             // Remove first tab
                             input_element.selectionStart = letter_i;
                             input_element.selectionEnd = letter_i+1;
-                            document.execCommand("delete", false, "");
+                            document.execCommand("delete", false, "\t");
 
                             // Change selection
                             if(selection_start > letter_i) { // Indented outside selection
@@ -60,7 +64,7 @@
                         // Add tab at start
                         input_element.selectionStart = letter_i;
                         input_element.selectionEnd = letter_i;
-                        document.execCommand("insertText", false, "   ");
+                        document.execCommand("insertText", false, "\t");
 
                         // Change selection
                         if(selection_start > letter_i) { // Indented outside selection
@@ -108,11 +112,15 @@
         // count the number of indents the current line starts with (up to our cursor position in the line)
         let cursor_pos_in_line = lines[current_line].length - (letter_i - input_element.selectionEnd) + 1;
         for (let i = 0; i < cursor_pos_in_line; i++) {
-            if (lines[current_line][i] == "   ") {
+            if (lines[current_line][i] == "\t") {
                 number_indents++;
             } else {
                 break;
             }
+        }
+
+        if (lines[current_line][lines[current_line].length - 1] == '{') {
+            number_indents++;
         }
 
         // determine the text before and after the cursor and chop the current line at the new line break
@@ -124,7 +132,7 @@
 
         // insert our indents and any text from the previous line that might have been after the line break
         for (let i = 0; i < number_indents; i++) {
-            new_line += "   ";
+            new_line += "\t";
         }
 
         // save the current cursor position
@@ -150,4 +158,14 @@
             input_element.scrollTop += 20; // px
         }
     }
+
+    check_close(codeInput, event) {
+        if(event.code != "BracketRight" || event.ctrlKey) {
+            return;
+        }
+        event.preventDefault(); // stop normal
+        document.execCommand("delete", false, "\t");
+        document.execCommand("insertText", false, "}");
+    }
+
 }
